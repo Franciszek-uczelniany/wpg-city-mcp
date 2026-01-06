@@ -8,7 +8,6 @@
                 "/Users/nhan/wpg-city-mcp/server.py"
             ],
             "env": {
-                "TRANSIT_API_KEY": "REDACTED_API_KEY",
                 "PYTHONUTF8": "1"
             }
         },

@@ -11,3 +11,9 @@ wheels/
 
 # Environment variables
 .env
+
+# Testing and Mutation artifacts
+mutants/
+.pytest_cache/
+.coverage
+.mutmut-cache

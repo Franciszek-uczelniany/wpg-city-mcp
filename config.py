@@ -1,4 +1,7 @@
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Transit Configuration
 TRANSIT_API_KEY = os.getenv("TRANSIT_API_KEY")
@@ -14,3 +17,4 @@ CITY_DATA_URL = "https://data.winnipeg.ca/resource/u7f6-5326.json"
 WEATHER_API_URL = "https://api.open-meteo.com/v1/forecast"
 WINNIPEG_LAT = 49.8951
 WINNIPEG_LON = -97.1384
+TRANSIT_TRIP_PLANNER_URL = f"{TRANSIT_BASE_URL}/trip-planner.json"

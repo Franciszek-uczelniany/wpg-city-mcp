@@ -108,3 +108,5 @@ async def find_stops_near(lat: float, lon: float, distance_meters: int = 500) ->
             results.append(f"- {stop_name} ({direction}) -> Stop #{stop_num}")
             
         return f"Bus stops near {lat}, {lon}:\n" + "\n".join(results)
+
+

@@ -18,3 +18,4 @@ WEATHER_API_URL = "https://api.open-meteo.com/v1/forecast"
 WINNIPEG_LAT = 49.8951
 WINNIPEG_LON = -97.1384
 TRANSIT_TRIP_PLANNER_URL = f"{TRANSIT_BASE_URL}/trip-planner.json"
+DEFAULT_TRANSIT_MODE = "depart-after"

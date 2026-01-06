@@ -2,7 +2,7 @@ import httpx
 import config
 from tools import locations, routing
 
-async def plan_trip(origin: str, destination: str, mode: str = "depart-after") -> str:
+async def plan_trip(origin: str, destination: str, mode: str = config.DEFAULT_TRANSIT_MODE, date: str | None = None, time: str | None = None) -> str:
     """
     Plan a trip between two points using Winnipeg Transit.
     
@@ -27,8 +27,11 @@ async def plan_trip(origin: str, destination: str, mode: str = "depart-after") -
         "api-key": config.TRANSIT_API_KEY,
         "origin": formatted_origin,
         "destination": formatted_dest,
-        "mode": mode or "depart-after"
+        "mode": mode or config.DEFAULT_TRANSIT_MODE
     }
+    
+    if date: params["date"] = date
+    if time: params["time"] = time
     
     try:
         headers = {"User-Agent": "WinnipegTransitMCP/1.0"}
@@ -153,13 +156,16 @@ async def plan_trip(origin: str, destination: str, mode: str = "depart-after") -
     except Exception as e:
         return f"Error executing plan_trip: {str(e)}"
 
-async def plan_journey(stops: list[str], optimize: bool = False) -> str:
+async def plan_journey(stops: list[str], optimize: bool = False, date: str | None = None, time: str | None = None) -> str:
     """
     Plan a multi-stop journey (A -> B -> C ...).
     
     Args:
+    Args:
         stops: List of locations (plain text, stop numbers, or formatted keys)
         optimize: If True, optimized the visit order (TSP) starting from the first stop.
+        date: Optional start date (YYYY-MM-DD or equivalent accepted by API).
+        time: Optional start time (HH:MM).
     """
     if len(stops) < 2:
         return "Error: Need at least 2 stops to plan a journey."
@@ -177,7 +183,7 @@ async def plan_journey(stops: list[str], optimize: bool = False) -> str:
             
     # 2. Optimize if requested
     if optimize:
-        formatted_stops = await routing.optimize_stop_order_greedy(formatted_stops)
+        formatted_stops = await routing.optimize_stop_order_greedy(formatted_stops, start_date=date, start_time=time)
         
     results = []
     if optimize:
@@ -191,7 +197,7 @@ async def plan_journey(stops: list[str], optimize: bool = False) -> str:
         dest_label = resolved_map.get(dest, dest)
         
         # We perform the plan. Note: plan_trip will re-format, but it's idempotent.
-        leg_result = await plan_trip(origin, dest)
+        leg_result = await plan_trip(origin, dest, date=date, time=time)
         results.append(f"--- Leg {i+1}: {origin_label} to {dest_label} ---\n{leg_result}")
         
     return "\n\n".join(results)

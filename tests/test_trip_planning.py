@@ -4,6 +4,13 @@ import config
 from tools.trip_planning import plan_trip, plan_journey
 from unittest.mock import MagicMock, patch, AsyncMock
 
+# Patch locations validation to avoid external dependencies/failures for these unit tests
+@pytest.fixture(autouse=True)
+def mock_locations():
+    with patch("tools.locations.is_valid_format", return_value=True), \
+         patch("tools.locations.resolve_address_osm", return_value=None):
+        yield
+
 @pytest.mark.asyncio
 async def test_plan_trip_success():
     """Test planning a trip when API returns valid data."""

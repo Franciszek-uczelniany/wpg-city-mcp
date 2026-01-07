@@ -1,9 +1,18 @@
 [project]
 name = "wpg-city-mcp"
 version = "0.1.0"
-description = "Add your description here"
+description = "MCP server providing tools for Winnipeg Transit data and 311 City Services information"
 readme = "README.md"
 requires-python = ">=3.12"
+authors = [
+    { name = "nhannpl", email = "nhan@example.com" }
+]
+keywords = ["mcp", "winnipeg", "transit", "311", "model-context-protocol"]
+license = { text = "MIT" }
+
+[project.urls]
+Repository = "https://github.com/nhannpl/wpg-city-mcp"
+Homepage = "https://github.com/nhannpl/wpg-city-mcp"
 dependencies = [
     "httpx>=0.28.1",
     "mcp[cli]>=1.25.0",

@@ -1,6 +1,14 @@
 # Winnipeg City MCP Server
 
-An MCP (Model Context Protocol) server that provides tools for accessing Winnipeg Transit data and 311 City Services information.
+A powerful [Model Context Protocol (MCP)](https://modelcontextprotocol.io) server that enables AI assistants to access real-time Winnipeg Transit data and 311 City Services information. This server allows AI models like Claude to help users plan trips, check bus arrivals, find stops, and explore city service reports.
+
+## Features
+
+- 🚌 **Real-time Transit Information**: Get live bus arrival times and route status
+- 🗺️ **Trip Planning**: Plan single trips or multi-stop journeys with optimized routes
+- 📍 **Location Search**: Find bus stops near any location
+- 🏙️ **311 City Services**: Search for reported issues and explore neighborhoods
+- ⏱️ **Time-Aware Routing**: Get accurate transit schedules based on actual timetables
 
 ## Tools Included
 
@@ -18,7 +26,30 @@ An MCP (Model Context Protocol) server that provides tools for accessing Winnipe
 ## Prerequisites
 
 - [uv](https://github.com/astral-sh/uv) (recommended for running the script)
-- Python 3.10+
+- Python 3.12+
+- Winnipeg Transit API key (see setup instructions below)
+
+## Setup
+
+### 1. Get a Winnipeg Transit API Key
+
+To use the transit features, you'll need a free API key from Winnipeg Transit:
+
+1. Visit the [Winnipeg Transit API Registration](https://api.winnipegtransit.com/) page
+2. Sign up for a free developer account
+3. Once approved, you'll receive your API key via email
+
+### 2. Configure Environment Variables
+
+1. Copy the example environment file:
+   ```bash
+   cp .env.example .env
+   ```
+
+2. Edit `.env` and add your API key:
+   ```bash
+   TRANSIT_API_KEY=your_actual_api_key_here
+   ```
 
 ## How to Run
 
@@ -64,3 +95,19 @@ npx @modelcontextprotocol/inspector uv run server.py
 
 This will start the Inspector in your browser, allowing you to manually call tools and verify the server's behavior.
 
+## Contributing
+
+Contributions are welcome! Feel free to:
+- Report bugs or suggest features by opening an issue
+- Submit pull requests with improvements
+- Improve documentation
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- [Winnipeg Transit](https://winnipegtransit.com/) for providing the transit API
+- [City of Winnipeg Open Data](https://data.winnipeg.ca/) for 311 services data
+- [Model Context Protocol](https://modelcontextprotocol.io) for the MCP framework

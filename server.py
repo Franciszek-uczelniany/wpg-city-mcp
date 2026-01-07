@@ -20,6 +20,7 @@ mcp.tool()(tools.transit.get_commute_status)
 mcp.tool()(tools.transit.find_stops_near)
 mcp.tool()(tools.trip_planning.plan_trip)
 mcp.tool()(tools.trip_planning.plan_journey)
+mcp.tool()(tools.trip_planning.plan_timed_itinerary)
 
 # Register City/Issue Tools
 mcp.tool()(tools.issues.search_311_issues)
